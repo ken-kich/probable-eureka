@@ -13,13 +13,7 @@
 ## 作るもの
 CUIベースのブラックジャックをPythonで作る  
   
-## 教材
-以下のUdemyの教材を購入して、教科書として使ってください。  
-https://www.udemy.com/course/python-beginner/  
-  
-勉強することが目的ではないです。  
-みなさんがエンジニアとして活躍できるレベルになることが目的です。  
-あくまでも教科書としての利用で、こちらがメインにならないようにご注意ください。
+## [教材](https://github.com/irupDevelop/curriculumBack/blob/main/docs/teachingMaterials.md)
   
 ## 手順
 1. 設計書の作成  
