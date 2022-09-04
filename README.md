@@ -17,15 +17,7 @@ CUIベースのブラックジャックをPythonで作る
   
 ## 手順
 1. 設計書の作成  
- ブラックジャックを作るにあたって、必要なのは以下の機能です。  
-  
- 前提：同じカードが二枚存在してはならない  
-- カードを４枚配る機能
-- 追加でカードを引くか選択する機能
-- 上記選択後のCPの挙動
-- バースト(21以上のこと)を判定する機能
-- 勝ち判定機能
-
+ - [詳細](https://github.com/irupDevelop/curriculumBack/blob/main/docs/developmentOfDesignDocument.md)
 2. 要件レビュー
 3. 実装
 4. 実装レビュー
