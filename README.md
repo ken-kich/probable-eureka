@@ -19,28 +19,8 @@ CUIベースのブラックジャックをPythonで作る
   
 ## 手順
 1. 設計書の作成  
- - [詳細](https://github.com/irupDevelop/curriculumBack/blob/main/docs/developmentOfDesignDocument.md)
-2. 要件レビュー
-3. 実装
-4. 実装レビュー
+  [詳細](https://github.com/irupDevelop/curriculumBack/blob/main/docs/developmentOfDesignDocument.md)
+2. 実装
+  [詳細](https://github.com/irupDevelop/curriculumBack/blob/main/docs/docsdevelopment.md)
 
 
-
-  
-  
-  
-    
-  
-  
-  
-  
-  
-  
-    
-  
-  
-  
-  
-  
-  
-  
