@@ -22,5 +22,6 @@ CUIベースのブラックジャックをPythonで作る
  - [詳細](https://github.com/irupDevelop/curriculumBack/blob/main/docs/developmentOfDesignDocument.md)
 2. 実装  
  - [詳細](https://github.com/irupDevelop/curriculumBack/blob/main/docs/docsdevelopment.md)
-
+3. テスト  
+ - [詳細](https://github.com/irupDevelop/curriculumBack/blob/main/docs/test.md)
 
