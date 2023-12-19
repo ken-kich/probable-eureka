@@ -1,5 +1,3 @@
-import random
-
 class Player:
     # Playerクラス: プレイヤー（ユーザーとコンピュータ）を表す
     def __init__(self, hands, name):
