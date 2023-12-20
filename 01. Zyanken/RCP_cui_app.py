@@ -42,11 +42,8 @@ class Player:
         if self.hands == enemy_hand:
             print("Draw!!!")
             return False
-        elif self.hands == "0" and enemy_hand == "2":
-            return True
-        elif self.hands == "2" and enemy_hand == "5":
-            return True
-        elif self.hands == "5" and enemy_hand == "0":
+        elif (self.hands, enemy_hand) in [("0","2"),("2","5"),("5","0")]:
+            print("You Win!!!")
             return True
         else:
             print("You Lose!!!")
@@ -58,11 +55,9 @@ print("Game Start")
 print("これはじゃんけんゲームです。ルールを説明します。\n[グー]  のときは[0]\n[チョキ]のときは[2]\n[パー]  のときは[5]\n[終了]  のときは[q]を入力してください。\nコンピュータに合計3回勝利すれば終了します。")
 
 #自分のインスタンスを作成
-player = Player()
-player.name = input("あなたの名前を入力してください⇒")
+player = Player("","プレイヤー")
 #対戦相手のインスタンスを作成
-enemy_player = Player()
-enemy_player.name = "対戦相手"
+enemy_player = Player("","コンピュータ")
 #勝利回数を数える
 count = 0
 #3回勝利するまでゲームをする
@@ -76,7 +71,7 @@ while True:
     enemy_player.show()
     
     if player.win_lose_check(enemy_player.hands):
-        print("You Win!!!")
         count += 1
+    print(f"勝利回数：{count}回")
 #終了
 print("コンピュータに合計3回勝利しました。終了します。")
