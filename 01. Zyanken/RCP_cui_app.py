@@ -73,5 +73,5 @@ while True:
     if player.win_lose_check(enemy_player.hands):
         count += 1
     print(f"勝利回数：{count}回")
-#終了
+    
 print("コンピュータに合計3回勝利しました。終了します。")
