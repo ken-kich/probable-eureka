@@ -1,70 +1,77 @@
+import random 
+
+#じゃんけんの選択肢の辞書
+hand_dict = {
+    "0": "グー",
+    "2": "チョキ",
+    "5": "パー"
+}
+#じゃんけんの選択肢のリスト
+input_dict = list(hand_dict.keys())
+input_dict.append("q")
+
+#Playerクラス
 class Player:
-    # Playerクラス: プレイヤー（ユーザーとコンピュータ）を表す
-    def __init__(self, hands, name):
-        self.hands = hands  # じゃんけんの手の辞書（例：'0': 'グー'）
-        self.name = name    # プレイヤー名
-        self.hand = ''      # 選択された手
-
-    def random_out(self):
-        # コンピュータのランダムな手の選択
-        self.hand = random.choice(list(self.hands.keys()))
-
+    def __init__(self, hands="", name=""):
+        self.hands = hands
+        self.name = name
+    #プレイヤーの手をランダムに決めるメソッド
+    def random_select(self):
+        self.hand = random.choice(list(hand_dict.keys()))
+        return self.hand
+    #プレイヤーの手を決めるメソッド
     def select(self):
-        # ユーザーによる手の選択。無効な入力があれば再入力を求める
-        print("選択肢: '0' = グー, '2' = チョキ, '5' = パー, 'q' = ゲーム終了")
+        tmp = ""
         while True:
-            self.hand = input("じゃんけん ⇒ ")
-            if self.hand in self.hands.keys() or self.hand == 'q':
+            if tmp == "":
+                tmp = input(f"じゃんけん⇒")
+            elif tmp == "q":
+                print("強制終了します")
+                break
+            elif tmp in input_dict:
+                self.hand = tmp
                 break
             else:
-                print("想定外な手です。'0', '2', '5', 'q'の中から入力してください。")
-
+                tmp = input(f"想定外の手です。{input_dict}の中から入力してください⇒")
+        return self.hand
+    #プレイヤー名と手を表示するメソッド
     def show(self):
-        # 選択された手の表示
-        hand_name = self.hands.get(self.hand, '')
-        print(f"{self.name}の手：{hand_name}")
-
+        print(f"{self.name}の手：{hand_dict[str(self.hands)]}")
+    #勝敗を決めるメソッド
     def win_lose_check(self, enemy_hand):
-        # 勝敗の判定。自分の手と敵の手を比較
-        if (self.hand, enemy_hand) in [('0', '2'), ('2', '5'), ('5', '0')]:
+        if self.hands == enemy_hand:
+            print("Draw!!!")
+            return False
+        elif (self.hands, enemy_hand) in [("0","2"),("2","5"),("5","0")]:
+            print("You Win!!!")
             return True
-        return False
+        else:
+            print("You Lose!!!")
+            return False
+        
 
-def main():
-    # メイン関数: ゲームの進行管理
-    hand_dict = {"0": "グー", "2": "チョキ", "5": "パー"}
-    player = Player(hand_dict, "プレイヤー")  # プレイヤーインスタンスの生成
-    computer = Player(hand_dict, "コンピュータ")  # コンピュータインスタンスの生成
+#ゲームスタート
+print("Game Start")
+print("これはじゃんけんゲームです。ルールを説明します。\n[グー]  のときは[0]\n[チョキ]のときは[2]\n[パー]  のときは[5]\n[終了]  のときは[q]を入力してください。\nコンピュータに合計3回勝利すれば終了します。")
 
-    player_win_count = 0  # プレイヤーの勝利数カウント
-    print("じゃんけんゲーム Game Start!")
+#自分のインスタンスを作成
+player = Player("","プレイヤー")
+#対戦相手のインスタンスを作成
+enemy_player = Player("","コンピュータ")
+#勝利回数を数える
+count = 0
+#3回勝利するまでゲームをする
+while True:
+    if count >=3:
+        break
+    player.hands = player.select()
+    player.show()
 
-    while player_win_count < 3:
-        # プレイヤーが3回勝つまでゲームを続行
-        print(f"現在の勝利数: {player_win_count}")
-        player.select()
-        if player.hand == 'q':
-            print("強制終了します")
-            break
-
-        computer.random_out()
-        player.show()
-        computer.show()
-
-        if player.hand in hand_dict:
-            # 勝敗の判定
-            if player.win_lose_check(computer.hand):
-                print("You Win!!!")
-                player_win_count += 1
-            elif player.hand == computer.hand:
-                print("Draw!!!")
-            else:
-                print("You Lose!!!")
-
-    if player_win_count >= 3:
-        print("ゲームに勝利しました！")
-
-if __name__ == "__main__":
-    main()
-
-#push test
+    enemy_player.hands = enemy_player.random_select()
+    enemy_player.show()
+    
+    if player.win_lose_check(enemy_player.hands):
+        count += 1
+    print(f"勝利回数：{count}回")
+    
+print("コンピュータに合計3回勝利しました。終了します。")
