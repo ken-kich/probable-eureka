@@ -31,6 +31,11 @@ class Player:
            (self.hand == "5" and enemy_hand == "0"):
             return True
         else:
+            return Falseで
+    def draw_check(self, enemy_hand):
+        if self.hand == enemy_hand:
+            return True
+        else:
             return False
 
 def main():
