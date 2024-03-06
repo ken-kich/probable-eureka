@@ -1,55 +1,68 @@
 import random
 
-class Player:
-    def __init__(self, name):
+
+class Player():
+
+    def __init__(self, hands, name):
+        self.hands = hands
         self.name = name
+        self.hand = None
         self.score = 0
 
-    def select(self):
-        while True:
-            try:
-                hand = input(f"{self.name}の手を選択してください（0: グー, 2: チョキ, 5: パー, q: 終了）: ")
-                if hand == "q":
-                    print("強制終了します")
-                    exit()
-                elif hand in ["0", "2", "5"]:
-                    return int(hand)
-                else:
-                    raise ValueError
-            except ValueError:
-                print("想定外の手です。0, 2, 5, qの中から入力してください。")
-
     def random_select(self):
-        return random.choice([0, 2, 5])
+        self.hand = random.choice(list(self.hands.keys()))
 
-    def show(self, hand):
-        hand_dict = {
-            0: "グー",
-            2: "チョキ",
-            5: "パー"
-        }
-        print(f"{self.name}の手：{hand_dict[hand]}")
+    def get_user_input(self, valid_choices):
+        options = ', '.join([
+            f'{key}:{value}'
+            for key, value in self.hands.items()
+        ])
+        while True:
+            print(f"{self.name}さん、じゃんけん（{options}, q)を選んでください: ")
+            choice = input()
+            if choice in valid_choices:
+                return choice
+            elif choice == 'q':
+                print("強制終了します")
+                exit()
+            print(f"想定外の手です。{', '.join(list(self.hands.keys()))}の中から入力してください.")
 
-    def win_lose_check(self, my_hand, opponent_hand):
-        if my_hand == opponent_hand:
+    def show_hand(self):
+        print(f"{self.name}の手: {self.hands[self.hand]}")
+
+    def win_lose_check(self, opponent_hand):
+        if self.hand == opponent_hand:
             print("Draw!!!")
-        elif (my_hand - opponent_hand) % 3 == 1:
+        elif (self.hand == '0' and opponent_hand == '2') or \
+             (self.hand == '2' and opponent_hand == '5') or \
+             (self.hand == '5' and opponent_hand == '0'):
             print("You Win!!!")
             self.score += 1
         else:
             print("You Lose!!!")
 
-    def play(self):
-        while self.score < 3:
-            print("Game Start")
-            player_hand = self.select()
-            opponent_hand = self.random_select()
-            self.show(player_hand)
-            self.show(opponent_hand)
-            self.win_lose_check(player_hand, opponent_hand)
-        print(f"{self.name}の勝ち数：{self.score}")
 
-# メイン処理
+hand_dict = {"0": "グー", "2": "チョキ", "5": "パー"}
+
+
+def main():
+    print("Game Start")
+    player = Player(hand_dict, "Player")
+    computer = Player(hand_dict, "Computer")
+
+    while player.score < 3:
+        player.hand = player.get_user_input(list(hand_dict.keys()) + ['q'])
+
+        if player.hand == 'q':
+            print("強制終了します")
+            break
+
+        player.show_hand()
+        computer.random_select()
+        computer.show_hand()
+        player.win_lose_check(computer.hand)
+        print(f"Your score: {player.score}\n")
+
+
 if __name__ == "__main__":
-    player = Player("Player")
-    player.play()
+    main()
