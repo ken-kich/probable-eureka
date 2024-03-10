@@ -146,7 +146,7 @@ class BlackjackGame:
         while True:
             play_again = input("Do you want to play again? (y/n): ").lower()
             if play_again == 'y':
-                # 再プレイ時にデッキと手札を再初期化
+                # 再プレイ時にデッキと手札を再度初期化
                 self.deck = Deck()
                 self.player = Player()
                 self.dealer = Dealer()
