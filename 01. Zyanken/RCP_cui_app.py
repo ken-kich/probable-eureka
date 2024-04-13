@@ -7,31 +7,36 @@ hand_dict = {
 }
 
 
+winning_hands = {
+    'グー': 'チョキ',
+    'チョキ': 'パー',
+    'パー': 'グー'
+}
+
+print('Game Start!')
+
+
 class Player:
-    def _init_(self, hands, name):
+    def __init__(self, hands, name):
         self.hand_dict = hands
         self.name = name
         self.hand = None
 
     def random_select(self):
-        self.hand = random.choice(hand_dict)
+        self.hand = random.choice(list(self.hand_dict.values()))
 
     def select(self):
         while True:
-            player_input = input("Playerの手を入力してください。(0:グー, 2:チョキ, 5:パー)")
+            player_input = input("Playerの手を入力してください。{0:グー, 2:チョキ, 5:パー,q:終了\
+                じゃんけん⇒")
             if player_input in ['0', '2', '5']:
-                if player_input == '0':
-                    self.hand = 'グー'
-                elif player_input == '2':
-                    self.hand = 'チョキ'
-                else:
-                    self.hand = 'パー'
+                self.hand = self.hand_dict[player_input]
                 break
             elif player_input == 'q':
-                print("ゲームを終了します。")
+                print("強制終了します。")
                 break
             else:
-                print("入力が不正です。再度入力してください。")
+                print("想定外の手です。{}の中から入力してください。")
 
     def show(self):
         if self.hand is not None:
@@ -49,20 +54,33 @@ class Player:
         else:
             return False
 
-    def increment_win_count(self):
-        self.win_count += 1
+    def play_game(self):
+        main_player_wins = 0
+        while main_player_wins < 3:
+            self.select()
+
+            computer_hand = random.choice(['0', '2', '5'])
+
+            print(f"CPの手: {self.hand_dict[computer_hand]}")
+
+            if self.hand_dict[computer_hand] in winning_hands[self.hand]:
+                print("You Win!!!")
+                main_player_wins += 1
+            elif self.hand == self.hand_dict[computer_hand]:
+                print("Draw!!!")
+            else:
+                print("You Lose!!!")
+
+            print(f"YOUの勝利数: {main_player_wins}")
+
+            if self.hand == 'q':
+                print("ゲーム終了")
+                break
+            elif main_player_wins >= 3:
+                print("ゲーム終了")
+                break
 
 
-player1 = Player("Player")
+player1 = Player(hand_dict, 'YOU')
 
-player1.select(Player.hand)
-player1.show()
-
-player2 = Player("CP")
-
-player2.select()
-player2.show()
-
-while player2.win_count < 3:
-    player1.select_hand()
-    player2.hand = random.choice()
+player1.play_game()
