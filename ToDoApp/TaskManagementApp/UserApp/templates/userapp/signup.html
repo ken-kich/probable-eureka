@@ -1,0 +1,28 @@
+{% extends "userapp/base.html" %}
+{% block title %}サインアップ画面{% endblock title %}
+
+{% block header %}
+<div>
+    <h1>新規ユーザー登録フォーム</h1>
+</div>
+{% endblock header %}
+
+{% block content %}
+<form method="post" class="signup-form">
+    {% csrf_token %}
+    {% for field in form %}
+        <p>
+            {{ field.label_tag }}<br>
+            {{ field }}
+            {% if field.help_text %}
+                <small style="color: grey">{{ field.help_text }}</small>
+            {% endif %}
+            {% for error in field.errors %}
+                <small style="color: red">{{ error }}</small>
+            {% endfor %}
+        </p>
+    {% endfor %}
+    <button type="submit">登録</button>
+</form>
+<a href="{% url 'home' %}">戻る</a>
+{% endblock content %}

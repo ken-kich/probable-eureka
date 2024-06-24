@@ -1,0 +1,48 @@
+{% extends "taskapp/task_base.html" %}
+{% block title %}詳細画面{% endblock title %}
+
+{% block header %}
+<div>
+    <strong>"{{ request.user }}" さん</strong>
+    <h1>Detail</h1>
+</div>
+{% endblock header %}
+
+{% block inner_content %}
+<div class="container">
+    <div class="alert {{ task.priority.get_alert_class }}" role="alert">
+        <h4>タスク：</h4>
+        <ul>
+            {{ task.task_name }}
+        </ul>
+        <h4>詳細：</h4>
+        <ul>
+            {{ task.task_detail|linebreaks }}
+        </ul>
+    </div>
+
+    <a href="{% url 'list' %}" class="btn btn-secondary">戻る</a>
+</div>
+<style>
+    .container, .jumbotron {
+        font-family: 'Yu Gothic', YuGothic, sans-serif;
+    }
+
+    .btn {
+        box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .task-name {
+        font-size: larger;
+        font-weight: bold;
+    }
+
+    ul {
+        padding-left: 20px;
+        font-weight: bold;
+    }
+    ul li {
+        margin-bottom: 10px;
+    }
+</style>
+{% endblock inner_content %}

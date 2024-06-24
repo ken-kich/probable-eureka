@@ -1,0 +1,20 @@
+{% extends "taskapp/task_base.html" %}
+{% block title %}
+削除画面
+{% endblock title %}
+
+{% block header %}
+<div>
+    <strong>"{{ request.user }}"さん</strong>
+    <h1>Delete</h1>
+</div>
+{% endblock header %}
+
+{% block inner_content %}
+<form action="" method="POST">
+{% csrf_token %}
+<p><strong style="color: red;">{{ task.task_name }}</strong>を本当に削除しますか</p>
+<input type="submit" value="削除">
+</form>
+<a href="{% url 'list' %}" style="display: block; margin-top: 1em">戻る</a>
+{% endblock inner_content %}

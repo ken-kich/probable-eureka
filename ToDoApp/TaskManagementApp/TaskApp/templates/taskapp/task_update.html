@@ -1,0 +1,34 @@
+{% extends "taskapp/task_base.html" %}
+{% block title %}編集画面{% endblock title %}
+
+{% block header %}
+<!-- ヘッダー部分: タスク編集のタイトルと説明 -->
+<div class="jumbotron">
+    <strong>"{{ request.user }}" さん</strong>
+    <h1 class="display-4">Update</h1>
+    <p class="lead">～進化するタスク、完成への一歩～</p>
+</div>
+{% endblock header %}
+
+{% block inner_content %}
+<!-- タスク編集フォーム -->
+<form method="POST" class="task-form">
+    {% csrf_token %}
+    <!-- フォームフィールドの動的生成 -->
+    {% for field in form %}
+        <p>
+            {{ field.label_tag }}<br>
+            {{ field }}
+            {% if field.help_text %}
+                <small style="color: grey">{{ field.help_text }}</small>
+            {% endif %}
+            {% for error in field.errors %}
+                <small style="color: red">{{ error }}</small>
+            {% endfor %}
+        </p>
+    {% endfor %}
+    <button type="submit" value="更新" style="margin-bottom: 16px;">更新</button>
+</form>
+<!-- 戻るボタン -->
+<a href="{% url 'list' %}" style="display: block; margin-top: 1em;">戻る</a>
+{% endblock inner_content %}

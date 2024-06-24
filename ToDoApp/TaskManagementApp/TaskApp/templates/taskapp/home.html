@@ -1,0 +1,20 @@
+{% extends "taskapp/task_base.html" %}
+
+{% block title %}
+ToDoアプリ
+{% endblock title %}
+
+{% block header %}
+<div>
+    <h1>ToDo管理</h1>
+</div>
+{% endblock header%}
+
+{% block content %}
+<div>
+    <p> すでにアカウントをお持ちの方はこちら！</p>
+    <a href="{% url 'login' %}" class="btn btn-secondary mb-3" tabindex="-1" role="botton" aria-disabled="True">ログイン</a>
+    <p>アカウントをまだお持ちでない方はこちら！
+    <a href="{% url 'signup' %}" class="btn btn-secondary mb-3" tabindex="-1" role="botton" aria-disabled="True">サインアップ</a>
+</div>
+{% endblock content%}
