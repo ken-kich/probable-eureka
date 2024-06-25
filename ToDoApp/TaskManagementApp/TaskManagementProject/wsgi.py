@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'TaskManagementApp.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'TaskManagementProject.settings')
 
 application = get_wsgi_application()

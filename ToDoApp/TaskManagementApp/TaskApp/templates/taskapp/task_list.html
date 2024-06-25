@@ -12,7 +12,6 @@
 <div class="container" >
     <a href="{% url 'create' %}" class="btn btn-secondary mb-3" tabindex="-1" role="button" aria-disabled="true">新規タスク作成</a>
     
-    <!-- ソートオプション -->
     <div>
         <a href="{% url 'list' %}?sort=date_created">作成日でソート</a>
         <a href="{% url 'list' %}?sort=date_updated">更新日でソート</a>
@@ -21,19 +20,13 @@
 
     {% for task in task_list %}
     <div class="alert {{ task.priority.get_alert_class }}" role="alert">
-        <p class="task-meta">
+        <p>
             【作成日：{{ task.created_at|date:"Y/m/d" }}（最終更新日：{{ task.updated_at|date:"Y/m/d" }}）】
         </p>
         {% if task.is_completed %}
-        <p class="task-name">
+        <p>
             ✔完了：<s>{{ task.task_name }}</s>
             <s><span class="task-date">(期日：{{ task.due_date|date:"Y/m/d" }})</span></s>
-        </p>
-        {% else %}
-        <p class="task-name">
-            {{ task.task_name }}
-            <span class="badge" style="background-color: {{ task.priority.color }};">(優先度: {{ task.priority.name }})</span>
-            <span class="task-date">(期日：{{ task.due_date|date:"Y/m/d" }})</span>
         </p>
         {% endif %}
         <a href="{% url 'update' task.pk %}" class="btn btn-outline-secondary" tabindex="-1" role="button" aria-disabled="true">編集</a>
@@ -45,23 +38,4 @@
         <input type="submit" value="ログアウト" class="btn btn-secondary">
     </form>
 </div>
-<style>
-    .container, .jumbotron {
-        font-family: 'Yu Gothic', YuGothic, sans-serif;
-    }
-
-    .btn {
-        box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.2);
-        font-weight: bold;
-    }
-
-    .task-name {
-        font-size: larger;
-        font-weight: bold;
-    }
-
-    .task-date {
-        margin-left: 10px;
-    }
-</style>
 {% endblock content %}

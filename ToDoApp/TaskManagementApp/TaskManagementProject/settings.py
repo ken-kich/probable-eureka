@@ -1,8 +1,9 @@
 from pathlib import Path
-
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
+STATIC_DIR = os.path.join(BASE_DIR, "static")
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
@@ -38,15 +39,12 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'TaskManagementApp.urls'
+ROOT_URLCONF = 'TaskManagementProject.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [
-            BASE_DIR / 'templates/taskapp',
-            BASE_DIR / 'templates/userapp',
-            ],
+        'DIRS': [TEMPLATE_DIR,],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -59,7 +57,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'TaskManagementApp.wsgi.application'
+WSGI_APPLICATION = 'TaskManagementProject.wsgi.application'
 
 
 # Database
@@ -108,10 +106,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [
+    STATIC_DIR
+]
 
-LOGIN_URL = 'login'
-LOGIN_REDIRECT_URL = 'taskapp/list'
-LOGOUT_REDIRECT_URL = 'taskapp/home'
+LOGIN_URL = 'userapp/login/'
+LOGIN_REDIRECT_URL = 'taskapp/list/'
+LOGOUT_REDIRECT_URL = 'taskapp/home/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

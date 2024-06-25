@@ -3,6 +3,8 @@ from .views import (
     TaskListView, TaskDetailView,
     TaskCreateView, TaskDeleteView, TaskUpdateView, HomeView)
 
+app_name = "taskapp"
+
 urlpatterns = [
     path('list/', TaskListView.as_view(), name='list'),
     path('detail/<int:pk>', TaskDetailView.as_view(), name='detail'),

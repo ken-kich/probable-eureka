@@ -1,13 +1,32 @@
+from django import forms
+from .models import CustomUser
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth import get_user_model
 
 
 class CustomUserCreationForm(UserCreationForm):
-    class Meta:
-        model = get_user_model()
-        fields = ('email', 'first_name', 'last_name', 'birthday')
+    first_name = forms.CharField(widget=forms.TextInput(
+        attrs={'class': 'form-control', },
+    ))
+    last_name = forms.CharField(widget=forms.TextInput(
+        attrs={'class': 'form-control', },
+    ))
+    email = forms.EmailField(widget=forms.EmailInput(
+        attrs={'class': 'form-control', },
+    ))
+    birthday = forms.DateField(widget=forms.widgets.DateInput(
+        attrs={'type': 'date', 'placeholder': 'yyyy-mm-dd (DOB)', 'class': 'form-control', },
+    ))
+    password1 = forms.CharField(
+        label="Password",
+        widget=forms.PasswordInput(
+            attrs={'class': 'form-control', },
+            ))
+    password2 = forms.CharField(
+        label="Password (confirm)",
+        widget=forms.PasswordInput(
+            attrs={'class': 'form-control', },
+            ))
 
-    def __init__(self, *args, **kwargs):
-        super(CustomUserCreationForm, self).__init__(*args, **kwargs)
-        if 'username' in self.fields:
-            del self.fields['username']
+    class Meta:
+        model = CustomUser
+        fields = ('email', 'first_name', 'last_name', 'birthday')

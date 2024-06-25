@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django.views.generic import (
     CreateView, ListView, DetailView,
     UpdateView, DeleteView, TemplateView)
@@ -17,39 +16,34 @@ class TaskCreateView(LoginRequiredMixin, CreateView):
     model = Task
     form_class = TaskCreateForm
     template_name = 'taskapp/task_create.html'
-    success_url = reverse_lazy('list')
+    success_url = reverse_lazy('taskapp:task_list')
 
     def form_valid(self, form):
-        form.instance.user = self.request.user
-        return super(TaskCreateView, self).form_valid(form)
+        form.user = self.request.user
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse_lazy("taskapp:task_list")
 
 
-class TaskDetailView(DetailView):
+class TaskDetailView(LoginRequiredMixin, DetailView):
     model = Task
     template_name = 'taskapp/task_detail.html'
 
 
 class TaskUpdateView(LoginRequiredMixin, UpdateView):
     model = Task
+    form_class = TaskUpdateForm
     template_name = 'taskapp/task_update.html'
-    fields = ('task_name', 'task_detail', 'due_date', 'is_completed', 'priority')
-    success_url = reverse_lazy('list')
 
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-        return super(TaskUpdateView, self).form_valid(form)
-
-    def get_form(self, form_class=None):
-        form = super().get_form(form_class)
-        form.fields['priority'].queryset = Priority.objects.all()
-        form.fields['priority'].empty_label = None
-        return form
+    def get_success_url(self):
+        return reverse_lazy("taskapp:task_detail")
 
 
-class TaskDeleteView(DeleteView):
+class TaskDeleteView(LoginRequiredMixin, DeleteView):
     model = Task
-    templete_name = 'taskapp/task_delete.html'
-    success_url = reverse_lazy('list')
+    template_name = 'taskapp/task_delete.html'
+    success_url = reverse_lazy('taskapp:task_list')
 
 
 class HomeView(TemplateView):
