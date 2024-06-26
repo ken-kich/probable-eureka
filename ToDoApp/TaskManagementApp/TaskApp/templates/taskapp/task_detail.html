@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "TaskApp/templates/taskapp/task_base.html" %}
 {% block title %}詳細画面{% endblock title %}
 
 {% block header %}
@@ -21,6 +21,6 @@
         </ul>
     </div>
 
-    <a href="{% url 'list' %}" class="btn btn-secondary">戻る</a>
+    <a href="{% url 'taskapp:list' %}" class="btn btn-secondary">戻る</a>
 </div>
 {% endblock inner_content %}

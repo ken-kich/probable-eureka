@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "TaskApp/templates/taskapp/task_base.html" %}
 {% block title %}
 新規作成画面
 {% endblock title %}
@@ -28,5 +28,5 @@
     {% endfor %}
     <button type="submit" value="作成" style="margin-bottom: 16px;">作成</button>
 </form>
-<a href="{% url 'list' %}">戻る</a>
+<a href="{% url 'taskapp:list' %}">戻る</a>
 {% endblock content %}
