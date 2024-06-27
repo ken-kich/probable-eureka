@@ -5,13 +5,13 @@ from django.contrib.auth.views import LoginView as BaseLoginView, LogoutView as 
 
 
 class UserLoginView(BaseLoginView):
-    template_name = 'UserApp/templates/userapp/login.html'
+    template_name = 'login.html'
     success_url = reverse_lazy('taskapp:list')
 
 
 class SignUpView(CreateView):
     form_class = CustomUserCreationForm
-    template_name = 'UserApp/templates/userapp/signup.html'
+    template_name = 'signup.html'
     success_url = reverse_lazy('userapp:login')
 
 

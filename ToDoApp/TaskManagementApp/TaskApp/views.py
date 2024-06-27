@@ -47,4 +47,4 @@ class TaskDeleteView(LoginRequiredMixin, DeleteView):
 
 
 class HomeView(TemplateView):
-    template_name = 'TaskApp/templates/taskapp/home.html'
+    template_name = 'home.html'
