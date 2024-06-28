@@ -14,7 +14,7 @@ class CustomUserCreationForm(UserCreationForm):
         attrs={'class': 'form-control', },
     ))
     birthday = forms.DateField(widget=forms.widgets.DateInput(
-        attrs={'type': 'date', 'placeholder': 'yyyy-mm-dd (DOB)', 'class': 'form-control', },
+        attrs={'type': 'date', 'placeholder': 'yyyy-mm-dd ', 'class': 'form-control',},
     ))
     password1 = forms.CharField(
         label="Password",

@@ -11,5 +11,5 @@ urlpatterns = [
     path('create/', TaskCreateView.as_view(), name='create'),
     path('delete/<int:pk>', TaskDeleteView.as_view(), name='delete'),
     path('update/<int:pk>', TaskUpdateView.as_view(), name='update'),
-    path('', HomeView.as_view(), name='home'),
+    path('home/', HomeView.as_view(), name='home'),
 ]

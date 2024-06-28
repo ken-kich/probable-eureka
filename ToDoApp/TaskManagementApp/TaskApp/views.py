@@ -42,9 +42,9 @@ class TaskUpdateView(LoginRequiredMixin, UpdateView):
 
 class TaskDeleteView(LoginRequiredMixin, DeleteView):
     model = Task
-    template_name = 'task_delete.html'
+    template_name = 'taskapp/task_delete.html'
     success_url = reverse_lazy('task_list')
 
 
 class HomeView(TemplateView):
-    template_name = 'home.html'
+    template_name = ('home.html')

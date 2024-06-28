@@ -1,4 +1,5 @@
 from pathlib import Path
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -25,6 +26,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'UserApp',
     'TaskApp',
+    'TaskManagementProject',
 ]
 
 MIDDLEWARE = [
@@ -43,8 +45,8 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            BASE_DIR / 'TaskApp' / 'templates',
-            BASE_DIR / 'UserApp' / 'templates',
+             os.path.join(BASE_DIR, 'UserApp', 'templates'),
+             os.path.join(BASE_DIR, 'TaskApp', 'templates'),
             ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -108,11 +110,13 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-LOGIN_URL = 'UserApp/templates/userapp/login/'
-LOGIN_REDIRECT_URL = 'TaskApp/templates/taskapp/list/'
-LOGOUT_REDIRECT_URL = 'TaskApp/templates/taskapp/home/'
+LOGIN_URL = 'login/'
+LOGIN_REDIRECT_URL = '/taskapp/list/'
+LOGOUT_REDIRECT_URL = 'home/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'UserApp.CustomUser'
+
+print(BASE_DIR)
