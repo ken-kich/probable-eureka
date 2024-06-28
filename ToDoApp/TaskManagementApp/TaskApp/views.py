@@ -22,9 +22,6 @@ class TaskCreateView(LoginRequiredMixin, CreateView):
         form.instance.user = self.request.user
         return super().form_valid(form)
 
-    def get_success_url(self):
-        return reverse_lazy("task_list")
-
 
 class TaskDetailView(LoginRequiredMixin, DetailView):
     model = Task

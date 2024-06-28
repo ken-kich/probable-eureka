@@ -1,26 +1,25 @@
 {% extends "task_base.html" %}
 {% block title %}
-新規作成画面
+ToDoリスト新規作成画面
 {% endblock title %}
 
 {% block header %}
 <div>
     <strong>"{{ request.user }}"さん</strong>
-    <h1>Create</h1>
+    <h1>Task作成</h1>
 </div>
 {% endblock header %}
 
 {% block content %}
-
 <form action="" method="POST" class="task-form">
     {% csrf_token %}
-    {{%% for field in form %}}
+    {% for field in form %}
     <p>
         {{ field.label_tag }}<br>
         {{ field }}
         {% if field.help_text %}
             <small style="color: gray">{{ field.help_text }}</small>
-        {{% endif %}}
+        {% endif %}
         {% for error in field.errors %}
             <small style="color: red">{{ error }}</small>
         {% endfor %}

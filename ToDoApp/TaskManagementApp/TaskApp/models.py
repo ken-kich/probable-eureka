@@ -3,7 +3,16 @@ from UserApp.models import CustomUser
 
 
 class Priority(models.Model):
-    name = models.CharField(max_length=50)
+    HIGH = '高'
+    MEDIUM = '中'
+    LOW = '低'
+    CHOICES = [
+        (HIGH, 'High'),
+        (MEDIUM, 'Medium'),
+        (LOW, 'Low'),
+    ]
+
+    name = models.CharField(max_length=50, choices=CHOICES)
 
     def __str__(self):
         return self.name

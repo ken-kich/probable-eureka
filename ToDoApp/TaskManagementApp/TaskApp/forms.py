@@ -5,12 +5,14 @@ from .models import Task, Priority
 class TaskCreateForm(forms.ModelForm):
     priority = forms.ModelChoiceField(
         queryset=Priority.objects.all(),
-        empty_label="Choose Priority",
-        to_field_name="name")
+        empty_label="優先度を選択",
+        label="優先度"
+    )
 
     due_date = forms.DateField(
-        widget=forms.DateInput(attrs={'type': 'date'},),
-        required=False
+        widget=forms.DateInput(attrs={'type': 'date'}),
+        required=False,
+        label="期限"
     )
 
     class Meta:
@@ -21,11 +23,13 @@ class TaskCreateForm(forms.ModelForm):
 class TaskUpdateForm(forms.ModelForm):
     priority = forms.ModelChoiceField(
         queryset=Priority.objects.all(),
-        to_field_name="name")
+        empty_label="優先度を選択",
+        label="優先度")
 
     due_date = forms.DateField(
         widget=forms.DateInput(attrs={'type': 'date'}),
-        required=False
+        required=False,
+        label='期限'
     )
 
     class Meta:
