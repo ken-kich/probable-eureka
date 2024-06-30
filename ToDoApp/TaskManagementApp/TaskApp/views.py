@@ -11,6 +11,19 @@ class TaskListView(ListView):
     template_name = 'task_list.html'
     model = Task
 
+    def get_queryset(self):
+        sort_param = self.request.GET.get('sort')
+        queryset = super().get_queryset()
+
+        if sort_param == 'updated_at':
+            queryset = queryset.order_by('updated_at')
+        elif sort_param == 'due_date':
+            queryset = queryset.order_by('due_date')
+        elif sort_param == 'priority':
+            queryset = queryset.order_by('priority')
+
+        return queryset
+
 
 class TaskCreateView(LoginRequiredMixin, CreateView):
     model = Task
@@ -34,13 +47,13 @@ class TaskUpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'task_update.html'
 
     def get_success_url(self):
-        return reverse_lazy('taskapp:detail')
+        return reverse_lazy('taskapp:detail', kwargs={'pk': self.object.pk})
 
 
 class TaskDeleteView(LoginRequiredMixin, DeleteView):
     model = Task
-    template_name = 'taskapp/task_delete.html'
-    success_url = reverse_lazy('task_list')
+    template_name = 'task_delete.html'
+    success_url = reverse_lazy('taskapp:list')
 
 
 class HomeView(TemplateView):

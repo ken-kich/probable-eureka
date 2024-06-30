@@ -28,6 +28,12 @@
             ✔完了：<s>{{ task.task_name }}</s>
             <s><span class="task-date">(期日：{{ task.due_date|date:"Y/m/d" }})</span></s>
         </p>
+        {% else %}
+        <p class="task-name">
+            {{ task.task_name }}
+            <span class="">(優先度: {{ task.priority.name }})</span>
+            <span class="task-date">(期日：{{ task.due_date|date:"Y/m/d" }})</span>
+        <p>
         {% endif %}
         <a href="{% url 'taskapp:update' pk=task.pk %}" class="btn btn-outline-secondary" tabindex="-1" role="button" aria-disabled="true">編集</a>
         <a href="{% url 'taskapp:detail' pk=task.pk %}" class="btn btn-outline-secondary" tabindex="-1" role="button" aria-disabled="true">詳細</a>
