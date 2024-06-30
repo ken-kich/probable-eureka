@@ -16,7 +16,7 @@ class TaskCreateView(LoginRequiredMixin, CreateView):
     model = Task
     form_class = TaskCreateForm
     template_name = 'task_create.html'
-    success_url = reverse_lazy('task_list')
+    success_url = reverse_lazy('taskapp:list')
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -34,7 +34,7 @@ class TaskUpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'task_update.html'
 
     def get_success_url(self):
-        return reverse_lazy("task_detail")
+        return reverse_lazy('taskapp:detail')
 
 
 class TaskDeleteView(LoginRequiredMixin, DeleteView):
