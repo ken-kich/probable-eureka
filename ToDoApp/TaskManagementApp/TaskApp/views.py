@@ -29,7 +29,7 @@ class TaskCreateView(LoginRequiredMixin, CreateView):
     model = Task
     form_class = TaskCreateForm
     template_name = 'task_create.html'
-    success_url = reverse_lazy('taskapp:list')
+    success_url = reverse_lazy('TaskApp:list')
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -47,14 +47,20 @@ class TaskUpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'task_update.html'
 
     def get_success_url(self):
-        return reverse_lazy('taskapp:detail', kwargs={'pk': self.object.pk})
+        return reverse_lazy('TaskApp:detail', kwargs={'pk': self.object.pk})
 
 
 class TaskDeleteView(LoginRequiredMixin, DeleteView):
     model = Task
     template_name = 'task_delete.html'
-    success_url = reverse_lazy('taskapp:list')
+    success_url = reverse_lazy('TaskApp:list')
 
 
 class HomeView(TemplateView):
     template_name = ('home.html')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['login_url'] = reverse_lazy('UserApp:login')
+
+        return context

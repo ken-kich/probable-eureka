@@ -29,8 +29,8 @@
 </form>
 
 
-<p>アカウントを持っていない方はこちらから<a href="{% url 'signup' %}">新規登録</a>をしてください。</p>
+<p>アカウントを持っていない方はこちらから<a href="{% url 'UserApp:signup' %}">新規登録</a>をしてください。</p>
 
 <!-- ホーム画面へのリンク -->
-<a href="{% url 'home' %}" class="btn btn-secondary">戻る</a>
+<a href="{% url 'TaskApp:home' %}" class="btn btn-secondary">戻る</a>
 {% endblock content %}

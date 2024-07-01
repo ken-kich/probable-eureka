@@ -3,7 +3,7 @@ from .views import (
     TaskListView, TaskDetailView,
     TaskCreateView, TaskDeleteView, TaskUpdateView, HomeView)
 
-app_name = "taskapp"
+app_name = "TaskApp"
 
 urlpatterns = [
     path('list/', TaskListView.as_view(), name='list'),
